@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.example.newsports.Adapter.HomeAdapter;
 import com.example.newsports.Adapter.PopularAdapter;
+import com.example.newsports.Adapter.RecommendedAdapter;
 import com.example.newsports.models.HomeCategory;
 import com.example.newsports.models.PopularModel;
+import com.example.newsports.models.RecommendedModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,16 +28,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Post#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Store extends Fragment {
 
 
     FirebaseFirestore firebaseFirestore;
-    RecyclerView popularRec,homeCatRec;
+    RecyclerView popularRec,homeCatRec,recommendedRec;
     FirebaseStorage db;
 
     //popular items
@@ -45,6 +43,10 @@ public class Store extends Fragment {
     //home category
     List<HomeCategory> categoryList;
     HomeAdapter homeAdapter;
+
+    //recommendation
+    List<RecommendedModel> recommendedModelList;
+    RecommendedAdapter recommendedAdapter;
 
 
     @Override
@@ -61,6 +63,8 @@ public class Store extends Fragment {
 
         popularRec=root.findViewById(R.id.pop_rec);
         homeCatRec=root.findViewById(R.id.explore_rec);
+        recommendedRec=root.findViewById(R.id.recommended_rec);
+
 
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         popularModelList=new ArrayList<>();
@@ -103,6 +107,31 @@ public class Store extends Fragment {
                                 HomeCategory homeCategory=document.toObject(HomeCategory.class);
                                 categoryList.add(homeCategory);
                                 homeAdapter.notifyDataSetChanged();}
+                        } else {
+                            Toast.makeText(getActivity(), "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+        //recommendation
+        recommendedRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        recommendedModelList=new ArrayList<>();
+        recommendedAdapter=new RecommendedAdapter(getActivity(),recommendedModelList);
+        recommendedRec.setAdapter(recommendedAdapter);
+
+        firebaseFirestore.collection("recommendation")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                RecommendedModel recommendedModel =document.toObject(RecommendedModel.class);
+                                recommendedModelList.add(recommendedModel);
+                                recommendedAdapter.notifyDataSetChanged();}
                         } else {
                             Toast.makeText(getActivity(), "Error"+task.getException(), Toast.LENGTH_SHORT).show();
                         }
