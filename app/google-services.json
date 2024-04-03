@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830269250760",
+    "project_id": "newsports-3c65c",
+    "storage_bucket": "newsports-3c65c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830269250760:android:9a7d13e814dbc993f099fd",
+        "android_client_info": {
+          "package_name": "com.example.newsports"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5AQQbrprib_J7PFCSz2DJNrRuAebbVtc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

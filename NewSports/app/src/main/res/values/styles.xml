@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="alert_dialog_dark"></style>
+
+    <style name="alert_dialog_light"></style>
+</resources>

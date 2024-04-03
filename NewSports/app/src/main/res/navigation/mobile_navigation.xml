@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_profile">
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.newsports.Profile"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_store"
+            app:destination="@id/nav_store" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_store"
+        android:name="com.example.newsports.Store"
+        android:label="@string/menu_store"
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_nav_store_to_nav_news"
+            app:destination="@id/nav_news" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_news"
+        android:name="com.example.newsports.News"
+        android:label="@string/menu_news"
+        tools:layout="@layout/fragment_news" />
+
+
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.newsports.Home"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_post"
+        android:name="com.example.newsports.Post"
+        android:label="@string/title_post"
+        tools:layout="@layout/fragment_post" />
+
+    <fragment
+        android:id="@+id/navigation_lookingFor"
+        android:name="com.example.newsports.LookingFor"
+        android:label="@string/title_lookingFor"
+        tools:layout="@layout/fragment_looking_for" />
+
+    <fragment
+        android:id="@+id/navigation_message"
+        android:name="com.example.newsports.Message"
+        android:label="@string/title_message"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.example.newsports.Schedule"
+        android:label="@string/title_schedule"
+        tools:layout="@layout/fragment_schedule" />
+</navigation>
