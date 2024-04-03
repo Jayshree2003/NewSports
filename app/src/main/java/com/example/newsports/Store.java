@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.newsports.Adapter.HomeAdapter;
 import com.example.newsports.Adapter.PopularAdapter;
+import com.example.newsports.models.HomeCategory;
+import com.example.newsports.models.PopularModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,11 +33,18 @@ import java.util.List;
  */
 public class Store extends Fragment {
 
+
+    FirebaseFirestore firebaseFirestore;
+    RecyclerView popularRec,homeCatRec;
+    FirebaseStorage db;
+
+    //popular items
     List<PopularModel> popularModelList;
     PopularAdapter popularAdapter;
-    FirebaseFirestore firebaseFirestore;
-    RecyclerView popularRec;
-    FirebaseStorage db;
+
+    //home category
+    List<HomeCategory> categoryList;
+    HomeAdapter homeAdapter;
 
 
     @Override
@@ -48,13 +57,13 @@ public class Store extends Fragment {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
 
-
+//popular item
 
         popularRec=root.findViewById(R.id.pop_rec);
+        homeCatRec=root.findViewById(R.id.explore_rec);
 
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         popularModelList=new ArrayList<>();
-       // popularAdapter=new PopularAdapter(getActivity(),popularModelList);
         popularAdapter=new PopularAdapter(getActivity(),popularModelList);
         popularRec.setAdapter(popularAdapter);
 
@@ -70,6 +79,30 @@ public class Store extends Fragment {
                                 PopularModel popularModel=document.toObject(PopularModel.class);
                             popularModelList.add(popularModel);
                             popularAdapter.notifyDataSetChanged();}
+                        } else {
+                            Toast.makeText(getActivity(), "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+//explore/home category
+        homeCatRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        categoryList=new ArrayList<>();
+        homeAdapter=new HomeAdapter(getActivity(),categoryList);
+        homeCatRec.setAdapter(homeAdapter);
+
+        firebaseFirestore.collection("HomeCategory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                HomeCategory homeCategory=document.toObject(HomeCategory.class);
+                                categoryList.add(homeCategory);
+                                homeAdapter.notifyDataSetChanged();}
                         } else {
                             Toast.makeText(getActivity(), "Error"+task.getException(), Toast.LENGTH_SHORT).show();
                         }

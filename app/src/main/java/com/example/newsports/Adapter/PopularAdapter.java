@@ -1,7 +1,6 @@
 package com.example.newsports.Adapter;
 
 import android.content.Context;
-import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.newsports.PopularModel;
+import com.example.newsports.models.PopularModel;
 import com.example.newsports.R;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
             holder.description.setText(popularModelList.get(position).getDescription());
             holder.rating.setText(popularModelList.get(position).getRating());
             holder.discount.setText(popularModelList.get(position).getDiscount());
-            holder.name.setText(popularModelList.get(position).getName());
+           // holder.name.setText(popularModelList.get(position).getName());
         }
     }
 

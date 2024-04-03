@@ -1,4 +1,4 @@
-package com.example.newsports;
+package com.example.newsports.models;
 
 public class PopularModel {
 
