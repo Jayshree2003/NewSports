@@ -17,6 +17,10 @@
     <string name="title_lookingFor">Looking_For</string>
     <string name="title_message">Message</string>
     <string name="title_schedule">Schedule</string>
+
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="posts">Posts</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
