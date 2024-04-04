@@ -44,12 +44,18 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     }
 
+    public void updateDataSet(List<RecommendedModel> newList) {
+        list.clear();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
        ImageView imageView;
        TextView name,description,rating;
 
